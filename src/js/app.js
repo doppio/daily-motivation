@@ -9,32 +9,6 @@ let connectedDarkBlueThemeOption = document.getElementById('connectedDarkBlue');
 let quote = '';
 let author = '';
 
-function loadJSON(callback) {  
-
-  let xobj = new XMLHttpRequest();
-  xobj.overrideMimeType("application/json");
-  xobj.open('GET', './src/data/quotes.json', true);
-  xobj.onreadystatechange = () => {
-    if (xobj.readyState == 4 && xobj.status == "200") {
-      callback(xobj.responseText);
-    }
-  }
-  xobj.send(null);
-}
-
-function newQuote() {
-  loadJSON((response) => {
-    // Parse JSON string into object
-    let quotes = JSON.parse(response);
-    let randomNumber = Math.random() * (Object.keys(quotes).length - 1);
-    randomNumber = Math.round(randomNumber);
-    quote = quotes[randomNumber].quote;
-    author = quotes[randomNumber].author;
-    document.getElementById('quote').innerHTML = quote;
-    document.getElementById('author').innerHTML = author;
-  })
-}
-
 let applyTheme = () => {
   let theme = localStorage.getItem('theme');
 
@@ -55,7 +29,7 @@ let applyTheme = () => {
   }
 }
 
-let setTheme = function(theme) {
+let setTheme = function (theme) {
   localStorage.setItem('theme', theme);
   applyTheme();
 }
@@ -63,7 +37,6 @@ let setTheme = function(theme) {
 /* ADD ONLOAD EVENTS */
 
 window.onload = applyTheme();
-window.onload = newQuote();
 
 /* ADD ALL THE ON CLICK EVENT LISTERNERS */
 settingsGear.addEventListener('click', () => {
@@ -104,7 +77,7 @@ clearThemeOption.addEventListener('click', () => {
 
 function checkStorageForTooltipInformation() {
   let hide = localStorage.getItem('hideTooltip');
-  
+
   if (hide) {
     let tooltipElement = document.getElementsByClassName('tooltip')[0];
     let parent = tooltipElement.parentElement;
@@ -128,14 +101,14 @@ function settingGearColorInvert(invert) {
     // Create the <style> tag
     let style = document.createElement('style');
     style.id = 'style';
-  
+
     // WebKit hack :(
     style.appendChild(document.createTextNode(''));
-  
+
     // Add the <style> element to the page
     document.head.appendChild(style);
-  
-   let sheet = style.sheet;
+
+    let sheet = style.sheet;
 
     sheet.insertRule("img.settings { filter: invert(100%); }");
   } else {

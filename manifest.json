@@ -1,15 +1,15 @@
 {
   "manifest_version": 2,
-  "name": "Daily Motivation - Motivational Quotes",
+  "name": "Productivity Reminder",
   "version": "2.4.13",
-  "description": "Start every search with motivation. This extension presents you with a motivational quote every time you open a new tab.",
-
+  "description": "Each time you open a new tab, ask whether this will be productive..",
   "background": {
-    "scripts": ["background.js"],
+    "scripts": [
+      "background.js"
+    ],
     "persistent": false
   },
-
-  "chrome_url_overrides" : {
+  "chrome_url_overrides": {
     "newtab": "index.html"
   }
 }
